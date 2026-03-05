@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Portal InfoSaúde</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 20px; }
+  .restrito { display: none; } /* Oculta painéis restritos por padrão */
+  #loginBox { border: 1px solid #ccc; padding: 20px; width: 300px; margin-bottom: 20px; }
+  #loginBox input { width: 100%; margin: 5px 0; padding: 5px; }
+</style>
+</head>
+<body>
+
+<h1>Portal InfoSaúde</h1>
+<p>Bem-vindo ao portal de análise de dados e informações em saúde de Minas Gerais.</p>
+
+<!-- Login para painéis restritos -->
+<div id="loginBox">
+  <h3>Login para painéis restritos</h3>
+  <input type="email" id="email" placeholder="Email institucional">
+  <input type="password" id="senha" placeholder="Senha">
+  <button onclick="login()">Entrar</button>
+  <p id="msgLogin" style="color:red;"></p>
+</div>
+
+<h2>Painéis Públicos</h2>
+
+<h3>📊 Vigilância Epidemiológica</h3>
+<ul>
+  <li><a href="https://app.powerbi.com/view?r=eyJrIjoiZjg2ZDY2MWEtMDIxZC00NTk0LTg4OTQtMDk1YjYzNDZlNTNiIiwidCI6Ijg3ZTRkYTJiLTgyZGYtNDhmNi05MTU3LTY5YzNjYTYwMGRmMiIsImMiOjR9" target="_blank">COVID - Monitoramento</a></li>
+  <li><a href="https://app.powerbi.com/view?r=eyJrIjoiMDY4NDZhNzctNTgzOC00ZThjLTlmYzYtN2IzMGFkYjVkMGM2IiwidCI6Ijg3ZTRkYTJiLTgyZGYtNDhmNi05MTU3LTY5YzNjYTYwMGRmMiIsImMiOjR9" target="_blank">COVID - Vacinômetro</a></li>
+</ul>
+
+<h2>Painéis Restritos</h2>
+
+<ul id="painelRestrito" class="restrito">
+  <li><a href="https://app.powerbi.com/view?r=EXEMPLO1" target="_blank">Auditoria do SUS-MG</a></li>
+  <li><a href="https://app.powerbi.com/view?r=EXEMPLO2" target="_blank">Estudos Técnicos - Acidentes de Trânsito</a></li>
+</ul>
+
+<script>
+// Lista de usuários autorizados
+const usuarios = [
+  { email: "joao@exemplo.gov.br", senha: "senha123" },
+  { email: "maria@exemplo.gov.br", senha: "senha456" }
+];
+
+// Função de login
+function login() {
+  const email = document.getElementById("email").value;
+  const senha = document.getElementById("senha").value;
+  const msg = document.getElementById("msgLogin");
+
+  const usuarioValido = usuarios.find(u => u.email === email && u.senha === senha);
+
+  if (usuarioValido) {
+    document.getElementById("painelRestrito").style.display = "block"; // Mostra painéis restritos
+    document.getElementById("loginBox").style.display = "none"; // Esconde login
+  } else {
+    msg.textContent = "Email ou senha inválidos.";
+  }
+}
+</script>
+
+</body>
+</html>
