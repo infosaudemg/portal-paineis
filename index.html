@@ -8,6 +8,10 @@
   #loginBox { border: 1px solid #ccc; padding: 20px; width: 300px; margin-bottom: 20px; }
   #loginBox input { width: 100%; margin: 5px 0; padding: 5px; }
   #secaoRestrita { display: none; } /* Oculta a seção de painéis restritos até login */
+  #painelRestrito {
+    list-style-type: disc; /* Garante o pontinho */
+    margin-left: 20px;     /* Mesma indentação da lista pública */
+  }
 </style>
 </head>
 <body>
@@ -28,16 +32,16 @@
 
 <h3>📊 Vigilância Epidemiológica</h3>
 <ul>
-  <li><a href="https://app.powerbi.com/view?r=LINK_REAL_COVID_MONITORAMENTO" target="_blank">COVID - Monitoramento</a></li>
-  <li><a href="https://app.powerbi.com/view?r=LINK_REAL_COVID_VACINOMETRO" target="_blank">COVID - Vacinômetro</a></li>
+  <li><a href="https://app.powerbi.com/view?r=eyJrIjoiZjg2ZDY2MWEtMDIxZC00NTk0LTg4OTQtMDk1YjYzNDZlNTNiIiwidCI6Ijg3ZTRkYTJiLTgyZGYtNDhmNi05MTU3LTY5YzNjYTYwMGRmMiIsImMiOjR9" target="_blank">COVID - Monitoramento</a></li>
+  <li><a href="	https://app.powerbi.com/view?r=eyJrIjoiMDY4NDZhNzctNTgzOC00ZThjLTlmYzYtN2IzMGFkYjVkMGM2IiwidCI6Ijg3ZTRkYTJiLTgyZGYtNDhmNi05MTU3LTY5YzNjYTYwMGRmMiIsImMiOjR9" target="_blank">COVID - Vacinômetro</a></li>
 </ul>
 
 <!-- Seção de painéis restritos -->
 <div id="secaoRestrita">
   <h2>Painéis Restritos</h2>
   <ul id="painelRestrito">
-    <li id="auditoriaSUS" style="display:none;"><a href="https://app.powerbi.com/view?r=LINK_REAL_AUDITORIA" target="_blank">Auditoria do SUS-MG</a></li>
-    <li id="estudosTecnicos" style="display:none;"><a href="https://app.powerbi.com/view?r=LINK_REAL_ESTUDOS" target="_blank">Estudos Técnicos - Acidentes de Trânsito</a></li>
+    <li id="auditoriaSUS" style="display:none;"><a href="https://app.powerbi.com/view?r=eyJrIjoiMjAyZjRlZDUtNzllMC00OTQ2LThiMWMtODEwZDNjZGRkYmJjIiwidCI6Ijg3ZTRkYTJiLTgyZGYtNDhmNi05MTU3LTY5YzNjYTYwMGRmMiIsImMiOjR9" target="_blank">Auditoria do SUS-MG</a></li>
+    <li id="estudosTecnicos" style="display:none;"><a href="https://app.powerbi.com/view?r=eyJrIjoiYTRhZmRkNTItMzYwMC00NTRjLTliZTEtMzA4YTkwYzFmNDRjIiwidCI6Ijg3ZTRkYTJiLTgyZGYtNDhmNi05MTU3LTY5YzNjYTYwMGRmMiIsImMiOjR9"_blank">Estudos Técnicos - Acidentes de Trânsito</a></li>
   </ul>
 </div>
 
@@ -65,13 +69,16 @@ function login() {
 
     // Mostra apenas os painéis autorizados
     usuarioValido.acessos.forEach(id => {
-      document.getElementById(id).style.display = "block";
+      document.getElementById(id).style.display = "list-item"; // mostra com pontinho
     });
   } else {
     msg.textContent = "Email ou senha inválidos.";
   }
 }
 </script>
+
+</body>
+</html>
 
 </body>
 </html>
