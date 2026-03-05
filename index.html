@@ -5,9 +5,9 @@
 <title>Portal InfoSaúde</title>
 <style>
   body { font-family: Arial, sans-serif; margin: 20px; }
-  .restrito { display: none; } /* Oculta painéis restritos por padrão */
   #loginBox { border: 1px solid #ccc; padding: 20px; width: 300px; margin-bottom: 20px; }
   #loginBox input { width: 100%; margin: 5px 0; padding: 5px; }
+  #secaoRestrita { display: none; } /* Oculta a seção de painéis restritos até login */
 </style>
 </head>
 <body>
@@ -32,12 +32,14 @@
   <li><a href="https://app.powerbi.com/view?r=eyJrIjoiMDY4NDZhNzctNTgzOC00ZThjLTlmYzYtN2IzMGFkYjVkMGM2IiwidCI6Ijg3ZTRkYTJiLTgyZGYtNDhmNi05MTU3LTY5YzNjYTYwMGRmMiIsImMiOjR9" target="_blank">COVID - Vacinômetro</a></li>
 </ul>
 
-<h2>Painéis Restritos</h2>
-
-<ul id="painelRestrito" class="restrito">
-  <li id="auditoriaSUS"><a href="https://app.powerbi.com/view?r=EXEMPLO_AUDITORIA" target="_blank">Auditoria do SUS-MG</a></li>
-  <li id="estudosTecnicos"><a href="https://app.powerbi.com/view?r=EXEMPLO_ESTUDOS" target="_blank">Estudos Técnicos - Acidentes de Trânsito</a></li>
-</ul>
+<!-- Seção de painéis restritos -->
+<div id="secaoRestrita">
+  <h2>Painéis Restritos</h2>
+  <ul id="painelRestrito">
+    <li id="auditoriaSUS"><a href="https://app.powerbi.com/view?r=EXEMPLO_AUDITORIA" target="_blank">Auditoria do SUS-MG</a></li>
+    <li id="estudosTecnicos"><a href="https://app.powerbi.com/view?r=EXEMPLO_ESTUDOS" target="_blank">Estudos Técnicos - Acidentes de Trânsito</a></li>
+  </ul>
+</div>
 
 <script>
 // Lista de usuários autorizados e quais painéis podem acessar
@@ -52,13 +54,14 @@ function login() {
   const senha = document.getElementById("senha").value.trim();
   const msg = document.getElementById("msgLogin");
 
-  const usuarioValido = usuarios.find(u => 
-    u.email.toLowerCase() === email && u.senha === senha
-  );
+  const usuarioValido = usuarios.find(u => u.email.toLowerCase() === email && u.senha === senha);
 
   if (usuarioValido) {
     // Esconde login
     document.getElementById("loginBox").style.display = "none";
+
+    // Mostra a seção restrita
+    document.getElementById("secaoRestrita").style.display = "block";
 
     // Mostra apenas os painéis autorizados
     usuarioValido.acessos.forEach(id => {
