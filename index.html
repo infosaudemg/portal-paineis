@@ -35,15 +35,15 @@
 <h2>Painéis Restritos</h2>
 
 <ul id="painelRestrito" class="restrito">
-  <li><a href="https://app.powerbi.com/view?r=EXEMPLO1" target="_blank">Auditoria do SUS-MG</a></li>
-  <li><a href="https://app.powerbi.com/view?r=EXEMPLO2" target="_blank">Estudos Técnicos - Acidentes de Trânsito</a></li>
+  <li id="auditoriaSUS"><a href="https://app.powerbi.com/view?r=EXEMPLO_AUDITORIA" target="_blank">Auditoria do SUS-MG</a></li>
+  <li id="estudosTecnicos"><a href="https://app.powerbi.com/view?r=EXEMPLO_ESTUDOS" target="_blank">Estudos Técnicos - Acidentes de Trânsito</a></li>
 </ul>
 
 <script>
-// Lista de usuários autorizados
+// Lista de usuários autorizados e quais painéis podem acessar
 const usuarios = [
-  { email: "joao@exemplo.gov.br", senha: "senha123" },
-  { email: "maria@exemplo.gov.br", senha: "senha456" }
+  { email: "luisa.sousa@saude.mg.gov.br", senha: "senha1", acessos: ["auditoriaSUS"] },
+  { email: "flavio.junior@saude.mg.gov.br", senha: "senha2", acessos: ["estudosTecnicos"] }
 ];
 
 // Função de login
@@ -55,8 +55,13 @@ function login() {
   const usuarioValido = usuarios.find(u => u.email === email && u.senha === senha);
 
   if (usuarioValido) {
-    document.getElementById("painelRestrito").style.display = "block"; // Mostra painéis restritos
-    document.getElementById("loginBox").style.display = "none"; // Esconde login
+    // Esconde login
+    document.getElementById("loginBox").style.display = "none";
+
+    // Mostra apenas os painéis autorizados
+    usuarioValido.acessos.forEach(id => {
+      document.getElementById(id).style.display = "block";
+    });
   } else {
     msg.textContent = "Email ou senha inválidos.";
   }
