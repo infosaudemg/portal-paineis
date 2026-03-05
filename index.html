@@ -48,11 +48,13 @@ const usuarios = [
 
 // Função de login
 function login() {
-  const email = document.getElementById("email").value;
-  const senha = document.getElementById("senha").value;
+  const email = document.getElementById("email").value.trim().toLowerCase();
+  const senha = document.getElementById("senha").value.trim();
   const msg = document.getElementById("msgLogin");
 
-  const usuarioValido = usuarios.find(u => u.email === email && u.senha === senha);
+  const usuarioValido = usuarios.find(u => 
+    u.email.toLowerCase() === email && u.senha === senha
+  );
 
   if (usuarioValido) {
     // Esconde login
